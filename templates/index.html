@@ -3,264 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Fitness Planner | Gemini</title>
-    <!-- Tailwind CSS CDNを読み込み -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>AI Fitness</title>
     <style>
-        /* カスタムスタイル: Noto Sansを優先 */
-        body {
-            font-family: "Inter", "Noto Sans JP", sans-serif;
-            background-color: #f8fafc; /* ライトブルーの背景 */
-        }
-        /* スクロールバーのスタイルをカスタマイズ（提案部分） */
-        #output-content::-webkit-scrollbar {
-            width: 8px;
-        }
-        #output-content::-webkit-scrollbar-thumb {
-            background-color: #94a3b8;
-            border-radius: 4px;
-        }
-        #output-content::-webkit-scrollbar-track {
-            background-color: #e2e8f0;
-        }
-        /* コンテナの幅を調整 */
-        .container {
-            max-width: 800px;
-        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 20px; background-color: #f4f7f6; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        h1 { color: #306eff; text-align: center; margin-bottom: 30px; }
+        label { display: block; margin-top: 15px; font-weight: bold; color: #333; }
+        input[type="number"], textarea { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        textarea { resize: vertical; height: 100px; }
+        button { background-color: #306eff; color: white; padding: 12px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; margin-top: 20px; width: 100%; }
+        button:hover { background-color: #0056b3; }
+        #output { background-color: #e9ecef; padding: 20px; border-radius: 4px; margin-top: 30px; white-space: pre-wrap; word-break: break-word; }
+        .loading { text-align: center; color: #555; font-style: italic; margin-top: 20px; }
     </style>
 </head>
-<body class="p-4 sm:p-8 flex justify-center items-start min-h-screen">
+<body>
 
-    <div class="container w-full bg-white rounded-xl shadow-2xl overflow-hidden my-8">
-        <!-- ヘッダー -->
-        <header class="bg-gradient-to-r from-blue-600 to-cyan-500 p-6 text-white text-center rounded-t-xl">
-            <h1 class="text-3xl font-extrabold flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-3" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm-1-10a1 1 0 011-1h1a1 1 0 110 2h-1v1a1 1 0 11-2 0V9a1 1 0 011-1zm0 5a1 1 0 100 2h2a1 1 0 100-2h-2z" clip-rule="evenodd" />
-                    <path d="M10 2a8 8 0 00-6.15 13.5l-1.5 1.5a.5.5 0 00.7.7l1.5-1.5A8 8 0 0110 2z" clip-rule="evenodd" fill-rule="evenodd" />
-                </svg>
-                AIパーソナルトレーナー
-            </h1>
-            <p class="mt-1 text-sm opacity-90">Geminiがあなたの目標に合わせた最適なプランを作成します。</p>
-        </header>
+<div class="container">
+    <h1>🤸 AI Fitness 🤸</h1>
+    <p>現在の身体情報と生活習慣を入力してください。Geminiが最適な献立とトレーニングを提案します。</p>
 
-        <main class="p-6 sm:p-10">
-            <!-- 入力フォーム -->
-            <section class="mb-8 p-6 bg-gray-50 rounded-lg border border-gray-200">
-                <h2 class="text-xl font-semibold text-gray-800 mb-4 border-b pb-2">現在の情報と目標</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label for="height" class="block text-sm font-medium text-gray-700 mb-1">現在の身長 (cm)</label>
-                        <input type="number" id="height" value="170" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-                    <div>
-                        <label for="weight" class="block text-sm font-medium text-gray-700 mb-1">現在の体重 (kg)</label>
-                        <input type="number" id="weight" value="65" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-                </div>
+    <label for="height">現在の身長 (cm):</label>
+    <input type="number" id="height" value="170" required>
 
-                <div class="mt-4">
-                    <label for="activity" class="block text-sm font-medium text-gray-700 mb-1">日常生活の過ごし方（例：デスクワーク、週3回ジム）</label>
-                    <textarea id="activity" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 h-20 resize-none" placeholder="デスクワーク中心で、運動はあまりしていません。"></textarea>
-                </div>
+    <label for="weight">現在の体重 (kg):</label>
+    <input type="number" id="weight" value="65" required>
 
-                <div class="mt-4">
-                    <label for="ideal" class="block text-sm font-medium text-gray-700 mb-1">理想の体型・目標（例：体脂肪を落としたい、筋肉をつけたい）</label>
-                    <textarea id="ideal" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 h-20 resize-none" placeholder="筋肉を残しながら、脂肪を落としたいです"></textarea>
-                </div>
-                
-                <button onclick="getRecommendation()" id="submit-button" class="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300 ease-in-out transform hover:scale-[1.01] shadow-lg shadow-blue-500/50 flex items-center justify-center">
-                    <span id="button-text">💪 最適なプランを生成する</span>
-                    <div id="loading-spinner" class="hidden animate-spin rounded-full h-5 w-5 border-2 border-t-2 border-white ml-2"></div>
-                </button>
-            </section>
+    <label for="activity">日常生活の過ごし方（例：デスクワーク中心、週3回ジム、よく歩くなど）:</label>
+    <textarea id="activity" required>デスクワーク中心で、運動はあまりしていません。</textarea>
 
-            <!-- 出力エリア -->
-            <section class="mt-8">
-                <h2 class="text-xl font-semibold text-gray-800 mb-4 border-b pb-2">📅 AIによる提案</h2>
-                <div id="output" class="bg-white p-4 sm:p-6 rounded-lg border border-gray-300 min-h-[150px] overflow-hidden">
-                    <p class="text-gray-500 text-center py-8" id="initial-message">
-                        入力項目を埋めて「最適なプランを生成する」ボタンを押してください。
-                    </p>
-                    <div id="output-content" class="text-gray-700 text-sm overflow-y-auto max-h-[60vh] whitespace-pre-wrap">
-                        <!-- Geminiからの提案がここに表示される -->
-                    </div>
-                </div>
-                <p class="text-xs text-gray-500 mt-2 text-center">※提案はAIによるものであり、医学的アドバイスではありません。必ず専門家の意見もご参照ください。</p>
-            </section>
-        </main>
+    <label for="ideal">理想の体型（例：体脂肪を落としたい、筋肉をつけたい、標準体型になりたい）:</label>
+    <textarea id="ideal" required>筋肉を残しながら、脂肪を落としたいです</textarea>
+
+    <button onclick="getRecommendation()">提案を取得</button>
+    
+    <div id="output">
+        ここにGeminiからの提案が表示されます。
     </div>
+</div>
 
-    <script>
-        // ----------------------------------------------------------------------------------
-        // Gemini API設定
-        // ----------------------------------------------------------------------------------
-        const MODEL_NAME = 'gemini-2.5-flash-preview-09-2025';
-        const API_KEY = ""; // Canvas環境で自動的に提供されます
-        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${API_KEY}`;
-        
-        // ----------------------------------------------------------------------------------
-        // UI操作
-        // ----------------------------------------------------------------------------------
-        const outputDiv = document.getElementById('output-content');
-        const initialMessage = document.getElementById('initial-message');
-        const submitButton = document.getElementById('submit-button');
-        const buttonText = document.getElementById('button-text');
-        const loadingSpinner = document.getElementById('loading-spinner');
-        
-        function setLoadingState(isLoading) {
-            submitButton.disabled = isLoading;
-            if (isLoading) {
-                buttonText.textContent = 'プラン生成中...';
-                loadingSpinner.classList.remove('hidden');
-                submitButton.classList.add('opacity-70', 'cursor-not-allowed');
-                outputDiv.innerHTML = '<p class="text-center p-4 text-blue-600 font-semibold">Geminiがあなたの情報を分析しています...</p>';
-                initialMessage.classList.add('hidden');
-            } else {
-                buttonText.textContent = '💪 最適なプランを生成する';
-                loadingSpinner.classList.add('hidden');
-                submitButton.classList.remove('opacity-70', 'cursor-not-allowed');
-            }
+<script>
+    // JavaScriptでフロントエンドの処理を記述
+    async function getRecommendation() {
+        const height = document.getElementById('height').value;
+        const weight = document.getElementById('weight').value;
+        const activity = document.getElementById('activity').value;
+        const ideal = document.getElementById('ideal').value;
+        const outputDiv = document.getElementById('output');
+
+        if (!height || !weight || !activity || !ideal) {
+            outputDiv.innerHTML = "全ての項目を入力してください。";
+            return;
         }
 
-        // ----------------------------------------------------------------------------------
-        // Gemini API呼び出しとロジック
-        // ----------------------------------------------------------------------------------
-        async function getRecommendation() {
-            const height = document.getElementById('height').value;
-            const weight = document.getElementById('weight').value;
-            const activity = document.getElementById('activity').value;
-            const ideal = document.getElementById('ideal').value;
+        // ロード中メッセージを表示
+        outputDiv.innerHTML = '<p class="loading">思考中... Gemini AIが提案を作成しています...</p>';
 
-            if (!height || !weight || !activity || !ideal) {
-                alertUser('全ての項目を入力してください。'); // カスタムアラートを使用
-                return;
-            }
-
-            setLoadingState(true);
-
-            // APIリクエストのペイロードを構築
-            const systemPrompt = "あなたはプロのパーソナルトレーナーであり、栄養士です。ユーザーの入力に基づき、実現可能で具体的な1週間の献立（3食）と、初心者でも始めやすい1週間のトレーニングプラン（運動時間と種類）を提案してください。提案はMarkdown形式で整形し、以下の2つのセクションで構成してください: 1. 献立プラン, 2. トレーニングプラン. 提案の冒頭で、ユーザーのBMIに基づいた現在の体型評価と、目標達成のためのカロリー目安も示してください。";
-            const userQuery = `以下の情報に基づいて、ダイエットとトレーニングの提案をしてください。
-- 身長: ${height}cm
-- 体重: ${weight}kg
-- 日常生活: ${activity}
-- 理想の体型・目標: ${ideal}`;
-
-            const payload = {
-                contents: [{ parts: [{ text: userQuery }] }],
-                systemInstruction: {
-                    parts: [{ text: systemPrompt }]
+        try {
+            // PythonサーバーのAPIエンドポイントにデータを送信
+            const response = await fetch('/get_recommendation', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
                 },
-            };
+                body: JSON.stringify({ height, weight, activity, ideal })
+            });
 
-            // 指数関数的バックオフの実装
-            const MAX_RETRIES = 5;
-            let lastError = null;
+            const result = await response.json();
 
-            for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
-                try {
-                    const response = await fetch(API_URL, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-
-                    if (response.status === 429 && attempt < MAX_RETRIES - 1) {
-                        // 429 Too Many Requests の場合はリトライ
-                        const delay = Math.pow(2, attempt) * 1000 + Math.random() * 1000;
-                        await new Promise(resolve => setTimeout(resolve, delay));
-                        continue;
-                    }
-
-                    const result = await response.json();
-
-                    if (response.ok) {
-                        const generatedText = result.candidates?.[0]?.content?.parts?.[0]?.text;
-                        if (generatedText) {
-                            // 成功した場合、Geminiの回答をMarkdownとして表示
-                            outputDiv.innerHTML = formatMarkdownToHtml(generatedText);
-                            outputDiv.scrollTop = 0; // スクロールを一番上に戻す
-                            setLoadingState(false);
-                            return;
-                        } else {
-                            throw new Error("AIからの応答が空でした。");
-                        }
-                    } else {
-                        // その他のAPIエラー
-                        const errorMessage = result.error?.message || JSON.stringify(result);
-                        throw new Error(`APIエラー (${response.status}): ${errorMessage}`);
-                    }
-                } catch (error) {
-                    console.error(`Fetch Error (Attempt ${attempt + 1}):`, error);
-                    lastError = error;
-                    if (attempt === MAX_RETRIES - 1) {
-                        // 最大リトライ回数に達した場合
-                        alertUser(`プランの生成中にエラーが発生しました: ${lastError.message}`);
-                        setLoadingState(false);
-                        return;
-                    }
-                    // リトライのための待機
-                    const delay = Math.pow(2, attempt) * 1000 + Math.random() * 1000;
-                    await new Promise(resolve => setTimeout(resolve, delay));
-                }
+            if (response.ok) {
+                // 成功した場合、Geminiの回答を表示
+                // Markdownをそのまま表示するため、CSSで pre-wrapを設定しています
+                outputDiv.innerHTML = result.recommendation;
+            } else {
+                // エラーが発生した場合
+                outputDiv.innerHTML = `エラーが発生しました: ${result.error || '不明なエラー'}`;
             }
+
+        } catch (error) {
+            console.error('Fetch Error:', error);
+            outputDiv.innerHTML = `通信エラーが発生しました: ${error.message}`;
         }
-        
-        // ----------------------------------------------------------------------------------
-        // 簡易Markdown to HTML変換 (Markdownの整形結果をそのまま表示するため)
-        // ----------------------------------------------------------------------------------
-        function formatMarkdownToHtml(markdownText) {
-            let html = markdownText;
-
-            // 見出しの変換
-            html = html.replace(/^### (.*$)/gim, '<h3 class="text-lg font-bold mt-4 mb-2 text-blue-800">$1</h3>');
-            html = html.replace(/^## (.*$)/gim, '<h2 class="text-xl font-bold mt-6 mb-3 text-blue-700 border-b-2 border-cyan-400 pb-1">$1</h2>');
-            html = html.replace(/^# (.*$)/gim, '<h1 class="text-2xl font-extrabold mt-8 mb-4 text-blue-900">$1</h1>');
-
-            // 強調の変換
-            html = html.replace(/\*\*(.*?)\*\*/gim, '<strong class="font-semibold text-blue-600">$1</strong>');
-            html = html.replace(/\*(.*?)\*/gim, '<i>$1</i>');
-
-            // リスト（順序なし）の変換 (改行とハイフンをリスト項目に)
-            html = html.replace(/^\s*-\s+(.*$)/gim, '<li class="ml-4 list-disc text-sm">$1</li>');
-            // リストの始まりと終わりをulタグで囲む (複雑な実装を避けるため簡易的に)
-            html = html.replace(/(<li.*?>[\s\S]*?<\/li>)/g, '<ul class="mb-3">$1</ul>');
-            
-            // 段落の変換（ただし、すでにHタグやリストになっている行は除く）
-            html = html.replace(/^(?!<h|<ul|<li)(.*$)/gim, '<p class="mb-3 text-sm">$1</p>');
-
-            // 連続する改行を一つにまとめる (テキストの整形のため)
-            html = html.replace(/\n\n/g, '<br><br>');
-            html = html.replace(/\n/g, '<br>');
-            html = html.replace(/<br><br>/g, '</p><p class="mb-3 text-sm">');
-            html = html.replace(/<br>/g, '<br class="my-1"/>');
-            
-            // 冗長なpタグを削除
-            html = html.replace(/<p class="mb-3 text-sm"><\/p>/g, '');
-
-
-            return `<div class="p-2">${html}</div>`;
-        }
-        
-        // ----------------------------------------------------------------------------------
-        // カスタムアラート機能 (alert()の代わりに簡易モーダル風表示)
-        // ----------------------------------------------------------------------------------
-        function alertUser(message) {
-            outputDiv.innerHTML = `<div class="p-6 bg-red-100 text-red-700 rounded-lg border border-red-300">
-                <h3 class="font-bold mb-2">エラーまたは警告</h3>
-                <p>${message}</p>
-            </div>`;
-            initialMessage.classList.add('hidden');
-            setLoadingState(false);
-        }
-
-        // ウィンドウロード時に初期メッセージを表示
-        document.addEventListener('DOMContentLoaded', () => {
-            outputDiv.innerHTML = '';
-            initialMessage.classList.remove('hidden');
-        });
-
-    </script>
+    }
+</script>
 </body>
 </html>
