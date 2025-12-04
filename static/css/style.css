@@ -182,14 +182,15 @@ button:active {
     color: #38bdf8; /* 水色 */
     border-bottom: 1px solid rgba(56, 189, 248, 0.3);
     padding-bottom: 5%;
-    margin-top: 5px; /* 上の余白を少し詰めた */
-    margin-bottom: 2.5px; /* 下の余白を詰めた */
+    margin-top: 0px; /* 上の余白を少し詰めた */
+    margin-bottom: 0; /* 下の余白を詰めた */
     font-size: 1.4rem;
 }
 
 /* 最初の見出しだけ上のマージンを消す */
 #output h2:first-child {
     margin-top: 0;
+    margin-bottom: 0;
 }
 
 /* 太字 (**) */
