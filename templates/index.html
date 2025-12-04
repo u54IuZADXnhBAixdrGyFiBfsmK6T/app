@@ -1,90 +1,43 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Fitness</title>
-    <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 20px; background-color: #f4f7f6; }
-        .container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        h1 { color: #306eff; text-align: center; margin-bottom: 30px; }
-        label { display: block; margin-top: 15px; font-weight: bold; color: #333; }
-        input[type="number"], textarea { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-        textarea { resize: vertical; height: 100px; }
-        button { background-color: #306eff; color: white; padding: 12px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; margin-top: 20px; width: 100%; }
-        button:hover { background-color: #0056b3; }
-        #output { background-color: #e9ecef; padding: 20px; border-radius: 4px; margin-top: 30px; white-space: pre-wrap; word-break: break-word; }
-        .loading { text-align: center; color: #555; font-style: italic; margin-top: 20px; }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+
+
+
 </head>
+
 <body>
 
-<div class="container">
-    <h1>🤸 AI Fitness 🤸</h1>
-    <p>現在の身体情報と生活習慣を入力してください。Geminiが最適な献立とトレーニングを提案します。</p>
+    <div class="container">
+        <h1>🤸 AI Fitness 🤸</h1>
+        <p>現在の身体情報と生活習慣を入力してください。Geminiが最適な献立とトレーニングを提案します。</p>
 
-    <label for="height">現在の身長 (cm):</label>
-    <input type="number" id="height" value="170" required>
+        <label for="height">現在の身長 (cm):</label>
+        <input type="number" id="height" value="170" required>
 
-    <label for="weight">現在の体重 (kg):</label>
-    <input type="number" id="weight" value="65" required>
+        <label for="weight">現在の体重 (kg):</label>
+        <input type="number" id="weight" value="65" required>
 
-    <label for="activity">日常生活の過ごし方（例：デスクワーク中心、週3回ジム、よく歩くなど）:</label>
-    <textarea id="activity" required>デスクワーク中心で、運動はあまりしていません。</textarea>
+        <label for="activity">日常生活の過ごし方:</label>
+        <textarea id="activity" required>デスクワーク中心で、運動はあまりしていません。</textarea>
 
-    <label for="ideal">理想の体型（例：体脂肪を落としたい、筋肉をつけたい、標準体型になりたい）:</label>
-    <textarea id="ideal" required>筋肉を残しながら、脂肪を落としたいです</textarea>
+        <label for="ideal">理想の体型:</label>
+        <textarea id="ideal" required>筋肉を残しながら、脂肪を落としたいです</textarea>
 
-    <button onclick="getRecommendation()">提案を取得</button>
-    
-    <div id="output">
-        ここにGeminiからの提案が表示されます。
+        <button id="recommendBtn">提案を取得</button>
+
+        <div id="output">
+            ここにGeminiからの提案が表示されます。
+        </div>
     </div>
-</div>
 
-<script>
-    // JavaScriptでフロントエンドの処理を記述
-    async function getRecommendation() {
-        const height = document.getElementById('height').value;
-        const weight = document.getElementById('weight').value;
-        const activity = document.getElementById('activity').value;
-        const ideal = document.getElementById('ideal').value;
-        const outputDiv = document.getElementById('output');
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 
-        if (!height || !weight || !activity || !ideal) {
-            outputDiv.innerHTML = "全ての項目を入力してください。";
-            return;
-        }
-
-        // ロード中メッセージを表示
-        outputDiv.innerHTML = '<p class="loading">思考中... Gemini AIが提案を作成しています...</p>';
-
-        try {
-            // PythonサーバーのAPIエンドポイントにデータを送信
-            const response = await fetch('/get_recommendation', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ height, weight, activity, ideal })
-            });
-
-            const result = await response.json();
-
-            if (response.ok) {
-                // 成功した場合、Geminiの回答を表示
-                // Markdownをそのまま表示するため、CSSで pre-wrapを設定しています
-                outputDiv.innerHTML = result.recommendation;
-            } else {
-                // エラーが発生した場合
-                outputDiv.innerHTML = `エラーが発生しました: ${result.error || '不明なエラー'}`;
-            }
-
-        } catch (error) {
-            console.error('Fetch Error:', error);
-            outputDiv.innerHTML = `通信エラーが発生しました: ${error.message}`;
-        }
-    }
-</script>
 </body>
+
 </html>

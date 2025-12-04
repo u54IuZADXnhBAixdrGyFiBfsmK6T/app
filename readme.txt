@@ -1,30 +1,31 @@
-gunicorn app:app --workers 2 --bind 0.0.0.0:$PORT
-pip install -r requirements.txt
-
-pipアップグレード
-python -m pip install --upgrade pip
-
-$env:GEMINI_API_KEY=""
+render
+    gunicorn app:app --workers 2 --bind 0.0.0.0:$PORT
+    pip install -r requirements.txt
+    GEMINI_API_KEY=""
 
 
-スクリプト実行許可
-Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
+terminal
+    1.スクリプト実行許可
+    Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
 
-仮想環境を作成
-python -m venv venv
+    2.pip 
+    python -m pip install --upgrade pip
 
-
-仮想環境をアクティベート
-.\venv\Scripts\Activate.ps1
-
-
- 必要な全ライブラリをインストール
-pip install -r requirements.txt
+    3.仮想環境を作成
+    python -m venv venv
 
 
-APIキーを設定
-$env:GEMINI_API_KEY=""
+    4.仮想環境をアクティベート
+    .\venv\Scripts\Activate.ps1
 
 
-起動
-python app.py
+    5.必要な全ライブラリをインストール
+    pip install -r requirements.txt
+
+
+    6.APIキーを設定
+    $env:GEMINI_API_KEY=""
+
+
+    7.起動
+    python app.py
