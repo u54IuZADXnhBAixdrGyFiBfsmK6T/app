@@ -1,0 +1,221 @@
+/* Google Fontsの読み込み（Interフォント） */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+
+:root {
+    --bg-color: #0f172a;       /* 深い背景色 */
+    --card-bg: #1e293b;        /* カード背景 */
+    --text-main: #f1f5f9;      /* メインテキスト */
+    --text-muted: #94a3b8;     /* 薄いテキスト */
+    --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%); /* 青〜シアンのグラデーション */
+    --input-bg: #334155;
+    --border-radius: 16px;
+    --focus-ring: rgba(56, 189, 248, 0.5);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    /* 背景にうっすら光るグラデーションを追加 */
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.15) 0%, transparent 40%);
+    color: var(--text-main);
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    background-color: rgba(30, 41, 59, 0.7); /* 半透明 */
+    backdrop-filter: blur(12px); /* すりガラス効果 */
+    padding: 40px;
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.8s ease-out;
+}
+
+/* タイトル周り */
+h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    text-align: center;
+    margin: 0 0 10px 0;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; /* 文字をグラデーションにする */
+    letter-spacing: -0.05em;
+}
+
+p {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+/* 入力フォーム */
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-main);
+    letter-spacing: 0.05em;
+}
+
+input[type="number"], 
+textarea {
+    width: 100%;
+    background-color: var(--input-bg);
+    border: 2px solid transparent;
+    color: white;
+    padding: 14px 16px;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-family: inherit;
+    box-sizing: border-box;
+    margin-bottom: 24px;
+    transition: all 0.3s ease;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* フォーカス時の光るエフェクト */
+input:focus, textarea:focus {
+    outline: none;
+    background-color: #1e293b;
+    border-color: #38bdf8;
+    box-shadow: 0 0 0 4px var(--focus-ring);
+}
+
+/* ボタンデザイン */
+button {
+    background: var(--accent-gradient);
+    color: white;
+    font-weight: 800;
+    font-size: 1.1rem;
+    padding: 18px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px -10px rgba(6, 182, 212, 0.6);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* AI出力エリア（ターミナル風） */
+#output {
+    margin-top: 40px;
+    padding: 24px;
+    background-color: #0b1120; /* より暗い黒 */
+    border-radius: 12px;
+    border-left: 4px solid #3b82f6;
+    color: #e2e8f0;
+    font-family: 'Consolas', 'Monaco', monospace; /* あえて等幅フォントでテック感を出す */
+    line-height: 1.7;
+    white-space: pre-wrap;
+    font-size: 0.95rem;
+    min-height: 60px;
+    box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* ローディング時の演出 */
+.loading {
+    text-align: center;
+    color: #38bdf8;
+    font-weight: bold;
+    animation: blink 1.5s infinite;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* スマホ対応 */
+@media (max-width: 600px) {
+    .container { padding: 24px; }
+    h1 { font-size: 2rem; }
+}
+
+/* ------------------------------------------- */
+/* Markdown変換後のスタイル (可読性/空白調整) */
+/* ------------------------------------------- */
+/* #output	line-height (1.7 → 1.5)	出力エリア全体の行間を詰めます。
+#output h2	margin-top/bottom (25px/10px → 20px/5px)	見出しの上下の余白を小さくし、セクションをコンパクトにします。
+#output p	margin-top/bottom (10px → 5px)	段落間の垂直方向の余白を最小限にします。
+#output ul	margin-top/bottom (5px/10px → 0px/5px)	リストの上下の余白を最小限にします。
+#output li	margin-bottom (5px → 2px)	箇条書きの項目間の縦の隙間を最小限にします。
+#output p / li	line-height (1.5 → 1.4)	段落とリストの行間を少し詰めます。 */
+
+/* 見出し (## -> <h2>) */
+#output h2 {
+    color: #38bdf8; /* 水色 */
+    border-bottom: 1px solid rgba(56, 189, 248, 0.3);
+    padding-bottom: 5%;
+    margin-top: 5px; /* 上の余白を少し詰めた */
+    margin-bottom: 2.5px; /* 下の余白を詰めた */
+    font-size: 1.4rem;
+}
+
+/* 最初の見出しだけ上のマージンを消す */
+#output h2:first-child {
+    margin-top: 0;
+}
+
+/* 太字 (**) */
+#output strong {
+    color: #f472b6; /* ピンク色で強調 */
+    font-weight: 800;
+}
+
+/* 段落 (<p>タグ) の上下の余白を小さくする */
+#output p {
+    margin-bottom: 3%; /* 15pxから10pxに縮小 */
+    margin-top: 3px;
+    text-align: left; /* 左揃えに戻す */
+    color: #e2e8f0;
+    line-height: 1.5; /* 行の高さを少し詰めた */
+}
+
+/* リスト (<ul>タグ) の上下の余白を小さくする */
+#output ul {
+    padding-left: 20px;
+    margin-bottom: 5px; /* 20pxから10pxに縮小 */
+    margin-top: 5px;
+}
+
+/* リスト内の各項目 (<li>タグ) の下の余白を小さくする */
+#output li {
+    margin-bottom: -5px; /* 8pxから5pxに縮小 */
+    line-height: 1.2; /* 行の高さを少し詰めた */
+}

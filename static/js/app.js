@@ -26,7 +26,7 @@ async function getRecommendation() {
         const result = await response.json();
 
         if (response.ok) {
-            outputDiv.innerHTML = result.recommendation;
+            outputDiv.innerHTML = marked.parse(result.recommendation);
         } else {
             outputDiv.innerHTML = `エラーが発生しました: ${result.error || '不明なエラー'}`;
         }

@@ -4,38 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Fitness</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+    <title>AI Fitness Pro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
 <body>
 
     <div class="container">
-        <h1>🤸 AI Fitness 🤸</h1>
-        <p>現在の身体情報と生活習慣を入力してください。Geminiが最適な献立とトレーニングを提案します。</p>
+        <h1>AI FITNESS <span style="font-size:0.5em; vertical-align: middle;">PRO</span></h1>
+        <p>Gemini AIがあなたの身体データを分析。<br>最適な栄養プランとワークアウトを構築します。</p>
 
-        <label for="height">現在の身長 (cm):</label>
-        <input type="number" id="height" value="170" required>
+        <label for="height">HEIGHT <span style="font-size:0.8em; opacity:0.7;">(身長 cm)</span></label>
+        <input type="number" id="height" placeholder="例: 170" value="170">
 
-        <label for="weight">現在の体重 (kg):</label>
-        <input type="number" id="weight" value="65" required>
+        <label for="weight">WEIGHT <span style="font-size:0.8em; opacity:0.7;">(体重 kg)</span></label>
+        <input type="number" id="weight" placeholder="例: 65" value="65">
 
-        <label for="activity">日常生活の過ごし方:</label>
-        <textarea id="activity" required>デスクワーク中心で、運動はあまりしていません。</textarea>
+        <label for="activity">LIFESTYLE <span style="font-size:0.8em; opacity:0.7;">(生活習慣)</span></label>
+        <textarea id="activity" placeholder="例: デスクワーク中心で、運動は週末のみ。">デスクワーク中心で、運動はあまりしていません。</textarea>
 
-        <label for="ideal">理想の体型:</label>
-        <textarea id="ideal" required>筋肉を残しながら、脂肪を落としたいです</textarea>
+        <label for="ideal">GOAL <span style="font-size:0.8em; opacity:0.7;">(理想の体型)</span></label>
+        <textarea id="ideal" placeholder="例: 腹筋を割りつつ、スタミナをつけたい。">筋肉を残しながら、脂肪を落としたいです</textarea>
 
-        <button id="recommendBtn">提案を取得</button>
+        <button id="recommendBtn">🚀 GENERATE PLAN 🚀</button>
 
         <div id="output">
-            ここにGeminiからの提案が表示されます。
+            > WAITING FOR DATA...
         </div>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 
 </body>
-
 
 </html>
