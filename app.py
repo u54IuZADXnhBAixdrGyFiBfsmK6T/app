@@ -72,7 +72,6 @@ def get_recommendation():
         # API呼び出しでエラーが発生した場合の処理
         return jsonify({"error": f"Gemini APIの呼び出し中にエラーが発生しました: {e}"}), 500
 
-# 4. アプリケーションの起動
+
 if __name__ == '__main__':
-    # 開発モードで実行
     app.run(debug=True)
