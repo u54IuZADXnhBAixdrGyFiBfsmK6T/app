@@ -17,10 +17,21 @@ except Exception as e:
     client = None
 
 #2. Webページの表示（HTMLファイルの読み込み）
-
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/services')
+def services():
+    return render_template('services.html')
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
+@app.route('/gemini_fitness')
+def gemini_fitness():
+    return render_template('gemini_fitness.html')
 
 # 3. Geminiにリクエストを送信するAPIエンドポイント
 @app.route('/get_recommendation', methods=['POST'])

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>サービス | FutureNexus</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f7f9fc; color: #1e293b; }
+        .active-link { border-bottom: 2px solid #3b82f6; color: #3b82f6; font-weight: 600; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+<header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+        <a href="/" class="text-2xl font-bold text-gray-900"><span class="text-blue-600">Future</span>Nexus</a>
+        <nav class="space-x-4 flex">
+            <a href="/" class="p-2 hover:text-blue-500">ホーム</a>
+            <a href="/services" class="active-link p-2">サービス</a>
+            <a href="/contact" class="p-2 hover:text-blue-500">お問い合わせ</a>
+        </nav>
+    </div>
+</header>
+
+<main class="flex-grow">
+    <div class="max-w-7xl mx-auto px-4 py-12">
+
+        <h2 class="text-4xl font-bold text-center mb-12 border-b-4 border-blue-500 pb-2 inline-block">
+            提供サービス
+        </h2>
+
+        <div class="space-y-12">
+
+            <!-- AIサービス -->
+            <div class="bg-white p-8 rounded-xl shadow-xl border border-blue-200 flex flex-col lg:flex-row items-center">
+                <div class="lg:w-1/3 flex justify-center mb-6 lg:mb-0 text-6xl text-blue-600">🤖</div>
+                <div class="lg:w-2/3 lg:pl-8">
+                    <h3 class="text-3xl font-bold mb-4 text-gray-800">AI駆動型ビジネスインテリジェンス</h3>
+                    <p class="text-gray-600 mb-4">
+                        貴社の蓄積されたデータ資産を、最新の機械学習モデルとディープラーニング技術で分析・活用します。
+                    </p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1 ml-4">
+                        <li>カスタムMLモデル開発</li>
+                        <li>リアルタイム予測ダッシュボード</li>
+                        <li>NLPによる顧客分析</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 量子サービス -->
+            <div class="bg-white p-8 rounded-xl shadow-xl border border-indigo-200 flex flex-col lg:flex-row-reverse items-center">
+                <div class="lg:w-1/3 flex justify-center mb-6 lg:mb-0 text-6xl text-indigo-600">⚛️</div>
+                <div class="lg:w-2/3 lg:pr-8">
+                    <h3 class="text-3xl font-bold mb-4 text-gray-800">量子コンピューティング戦略計画</h3>
+                    <p class="text-gray-600 mb-4">
+                        次世代の計算技術である量子コンピューティングへの移行戦略を立案します。
+                    </p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1 ml-4">
+                        <li>量子アルゴリズム適用評価</li>
+                        <li>量子耐性暗号ロードマップ</li>
+                        <li>Qiskit/Cirqを用いたPoC開発</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ブロックチェーン -->
+            <div class="bg-white p-8 rounded-xl shadow-xl border border-green-200 flex flex-col lg:flex-row items-center">
+                <div class="lg:w-1/3 flex justify-center mb-6 lg:mb-0 text-6xl text-green-600">🔗</div>
+                <div class="lg:w-2/3 lg:pl-8">
+                    <h3 class="text-3xl font-bold mb-4 text-gray-800">分散型台帳技術とセキュリティ監査</h3>
+                    <p class="text-gray-600 mb-4">
+                        ブロックチェーンを設計・実装し、スマートコントラクトの脆弱性を監査します。
+                    </p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1 ml-4">
+                        <li>Hyperledger/Corda 構築</li>
+                        <li>Solidity セキュリティレビュー</li>
+                        <li>サプライチェーンのトレーサビリティ</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</main>
+
+<footer class="bg-gray-800 text-white mt-12">
+    <div class="max-w-7xl mx-auto px-4 py-8 text-center">
+        <p>&copy; 2025 FutureNexus Consulting. All rights reserved.</p>
+    </div>
+</footer>
+
+</body>
+</html>

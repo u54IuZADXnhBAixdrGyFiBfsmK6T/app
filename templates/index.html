@@ -1,40 +1,81 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Fitness Pro</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>ホーム | FutureNexus</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f7f9fc; color: #1e293b; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px);} to { opacity: 1; transform: translateY(0);} }
+        .animate-fadeIn { animation: fadeIn 0.5s ease-out; }
+        .active-link { border-bottom: 2px solid #3b82f6; color: #3b82f6; font-weight: 600; }
+    </style>
 </head>
+<body class="min-h-screen flex flex-col">
 
-<body>
-
-    <div class="container">
-        <h1>AI FITNESS <span style="font-size:0.5em; vertical-align: middle;">PRO</span></h1>
-        <p>Gemini AIがあなたの身体データを分析。<br>最適な栄養プランとワークアウトを構築します。</p>
-
-        <label for="height">HEIGHT <span style="font-size:0.8em; opacity:0.7;">(身長 cm)</span></label>
-        <input type="number" id="height" placeholder="例: 170" value="170">
-
-        <label for="weight">WEIGHT <span style="font-size:0.8em; opacity:0.7;">(体重 kg)</span></label>
-        <input type="number" id="weight" placeholder="例: 65" value="65">
-
-        <label for="activity">LIFESTYLE <span style="font-size:0.8em; opacity:0.7;">(生活習慣)</span></label>
-        <textarea id="activity" placeholder="例: デスクワーク中心で、運動は週末のみ。">デスクワーク中心で、運動はあまりしていません。</textarea>
-
-        <label for="ideal">GOAL <span style="font-size:0.8em; opacity:0.7;">(理想の体型)</span></label>
-        <textarea id="ideal" placeholder="例: 腹筋を割りつつ、スタミナをつけたい。">筋肉を残しながら、脂肪を落としたいです</textarea>
-
-        <button id="recommendBtn">🚀 GENERATE PLAN 🚀</button>
-
-        <div id="output">
-                > 😁データの入力を待っています...😁
-        </div>
+<header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+        <a href="/" class="text-2xl font-bold text-gray-900">
+            <span class="text-blue-600">GEMINI</span>-Fitness
+        </a>
+        <nav class="space-x-4 flex">
+            <a href="/" class="active-link p-2">ホーム</a>
+            <a href="/services" class="p-2 hover:text-blue-500">サービス</a>
+            <a href="/contact" class="p-2 hover:text-blue-500">お問い合わせ</a>
+        </nav>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</header>
+
+<main class="flex-grow">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 animate-fadeIn">
+
+        <!-- Home content -->
+        <section>
+            <div class="text-center py-20 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-xl shadow-2xl text-white">
+                <h1 class="text-5xl md:text-6xl font-extrabold mb-4 leading-tight">
+                    未来を、今、あなたの手に。
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 opacity-90 max-w-3xl mx-auto">
+                    FutureNexusは、AI、量子コンピューティング、ブロックチェーンなどの最先端技術を活用し、あなたのビジネスを次のレベルへ導きます。
+                </p>
+                <a href="/gemini_fitness"
+                   class="bg-white text-indigo-700 hover:bg-gray-100 font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105">
+                    私たちのサービスを見る →
+                </a>
+            </div>
+
+            <div class="mt-16 grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+                    <div class="text-blue-500 mb-4 text-3xl">🚀</div>
+                    <h3 class="text-xl font-bold mb-3">迅速なプロトタイピング</h3>
+                    <p class="text-gray-600">アイデアを迅速に検証し、市場投入までの時間を劇的に短縮します。</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+                    <div class="text-blue-500 mb-4 text-3xl">💡</div>
+                    <h3 class="text-xl font-bold mb-3">専門家による指導</h3>
+                    <p class="text-gray-600">各分野の博士号を持つ専門家が、貴社の課題解決をサポートします。</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+                    <div class="text-blue-500 mb-4 text-3xl">🛡️</div>
+                    <h3 class="text-xl font-bold mb-3">最高水準のセキュリティ</h3>
+                    <p class="text-gray-600">最新の暗号技術とセキュリティプロトコルで、貴社のデータを守ります。</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</main>
+
+<footer class="bg-gray-800 text-white mt-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
+        <p>&copy; 2025 FutureNexus Consulting. All rights reserved.</p>
+        <p class="text-sm text-gray-400 mt-2">未来を共に創造しましょう。</p>
+    </div>
+</footer>
 
 </body>
-
 </html>
